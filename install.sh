@@ -1,23 +1,18 @@
-zshrcFile=~/.zshrc
-zshrcFileTemplate=.zshrc_template
-tmpFile=~/.zshrc_tmp
-
 # Install Oh-My-Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
+# Install antigen
+brew install antigen
 
-# Install powerlevel theme
-sh theme/powerlevel.sh $zshrcFileTemplate $tmpFile
+# Install tmux
+brew install tmux
 
 # Install fonts
-git clone https://github.com/powerline/fonts.git
-cd fonts
-./install.sh
-cd ..
-rm -rf fonts
+sh fonts/install.sh
 
-# Install plugins
-sh plugins/all.sh $tmpFile
+# Install zshrc
+echo "Copying files..."
+cp .zshrc ~/.zshrc
+cp .p10k.zsh ~/.p10k.zsh
+cp .tmux.conf ~/.tmux.conf
 
-mv $tmpFile $zshrcFile
-rm $tmpFile
